@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <aside>
+    <nav>
+        <ul class="dropdown">
+            <a href="#">Tank</a>
+            <ul class="dropdown-menu hidden">
+                {% for tank in tanks %}
+                    <li><a href="{% url 'tank-detail' tank.id %}">{{ tank.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </ul>
+        <ul class="dropdown">
+            <a href="#">Damage Dealer</a>
+            <ul class="dropdown-menu hidden">
+                {% for damage_dealer in damage_dealers %}
+                    <li><a href="{% url 'damagedealer-detail' damage_dealer.id %}">{{ damage_dealer.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </ul>
+        <ul class="dropdown">
+            <a href="#">Support</a>
+            <ul class="dropdown-menu hidden">
+                {% for support in supports %}
+                    <li><a href="{% url 'support-detail' support.id %}">{{ support.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </ul>
+    </nav>
+</aside>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>

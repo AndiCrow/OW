@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ support.name }}{% endblock %}
+
+{% block content %}
+    <div>Your Support Hero is: {{ support.name }}</div>
+    <div>{{ support.name }} has the background story: {{ support.background_story }}</div>
+    <div>Your Weapon is: {{ support.weapon }}</div>
+
+    <p>Your 1st Ability is: {{ support.first_ability }}</p>
+    {% if support.second_ability %}
+    <p>Your 2nd Ability is: {{ support.second_ability }}</p>
+    {% endif %}
+    {% if support.third_ability %}
+    <p>Your 3rd Ability is: {{ support.third_ability }}</p>
+    {% endif %}
+    <p>Your Ultimate is: {{ support.ulti }}</p>
+
+    <h3>Counters</h3>
+    <ul>
+        {% for counter in counters %}
+            {% for hero in counter.countered_hero.all %}
+                <li>{{ hero.name }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <h3>Countered By</h3>
+    <ul>
+        {% for counter in countered_by %}
+            <li>{{ counter.hero.name }}</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

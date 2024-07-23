@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ damage_dealer.name }}{% endblock %}
+
+{% block content %}
+    <div>Your Damage Dealer is: {{ damage_dealer.name }}</div>
+    <div>{{ damage_dealer.name }} has the background story: {{ damage_dealer.background_story }}</div>
+    <div>Your Weapon is: {{ damage_dealer.weapon }}</div>
+
+    <p>Your 1st Ability is: {{ damage_dealer.first_ability }}</p>
+    {% if damage_dealer.second_ability %}
+    <p>Your 2nd Ability is: {{ damage_dealer.second_ability }}</p>
+    {% endif %}
+    {% if damage_dealer.third_ability %}
+    <p>Your 3rd Ability is: {{ damage_dealer.third_ability }}</p>
+    {% endif %}
+    <p>Your Ultimate is: {{ damage_dealer.ulti }}</p>
+
+    <h3>Counters</h3>
+    <ul>
+        {% for counter in counters %}
+            {% for hero in counter.countered_hero.all %}
+                <li>{{ hero.name }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <h3>Countered By</h3>
+    <ul>
+        {% for counter in countered_by %}
+            <li>{{ counter.hero.name }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tank.name }}{% endblock %}
+
+{% block content %}
+<div class="heros">
+    <div>Your Hero is: {{ tank.name }}</div>
+    <div>{{ tank.name }} has the background story: {{ tank.background_story }}</div>
+    Your Weapon is: {{ tank.weapon }}
+
+    <p>Your 1st Ability is: {{ tank.first_ability }}</p>
+    {% if tank.second_ability %}
+    <p>Your 2nd Ability is: {{ tank.second_ability }}</p>
+    {% endif %}
+    {% if tank.third_ability %}
+    <p>Your 3rd Ability is: {{ tank.third_ability }}</p>
+    {% endif %}
+    <p>Your Ultimate is: {{ tank.ulti }}</p>
+
+    <h3>Counters</h3>
+    <ul>
+        {% for counter in counters %}
+            {% for hero in counter.countered_hero.all %}
+                <li>{{ hero.name }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <h3>Countered By</h3>
+    <ul>
+        {% for counter in countered_by %}
+            <li>{{ counter.hero.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+        
+{% endblock %}
